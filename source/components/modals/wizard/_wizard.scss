@@ -1,3 +1,46 @@
 #modal-wizard {
+  .progress {
+    height:10px;
+    @include border-radius(0);
+    margin:0;
+    background:$c-grey;
+  }
+  .progress-bar {
+    background: $c-green;
+  }
+}
 
+.modal-wizard-step {
+  height:600px;
+  padding:35px 30px;
+  @include box-sizing(border-box);
+  h1 {
+    text-align:center;
+    font-size:29px;
+    line-height:37px;
+    margin:0 0 21px;
+  }
+  p {
+    font-size: 29px;
+    line-height:34px;
+  }
+  .area-button {
+    text-align:center;
+  }
+}
+
+#modal-wizard-step-welcome {
+  .logo {
+    width:130px;
+    height:210px;
+    margin:50px auto;
+    background:url($img-logo) no-repeat center;
+    background-size:130px 210px;
+  }
+}
+
+#modal-wizard-step-done {
+  .area-button {
+    margin-top:140px;
+  }
 }

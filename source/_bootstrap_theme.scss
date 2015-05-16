@@ -1,0 +1,24 @@
+.modal-content {
+  border:none;
+  background: $c-lightgrey;
+  @include box-shadow(0 0 40px rgba(0,0,0,0.3));
+  @include border-radius(0);
+}
+
+.btn {
+  @include border-radius(0);
+  border:0;
+}
+.btn-primary {
+  background:$c-blue;
+  &:hover,
+  &:active {
+    background:darken($c-blue,10%);
+  }
+}
+
+.btn-lg {
+  font-size: 26px;
+  font-weight:400;
+  padding: 11px 25px;
+}

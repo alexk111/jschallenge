@@ -1,3 +1,5 @@
 'use strict';
 
-var jsChallenge = angular.module('jsChallenge', []);
+var jsChallenge = angular.module('jsChallenge', [
+  'ui.bootstrap'
+]);

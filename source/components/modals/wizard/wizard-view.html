@@ -1,1 +1,33 @@
-<div id="modal-wizard"></div>
+<div id="modal-wizard">
+  <progressbar value="progress"></progressbar>
+  <div id="modal-wizard-step-welcome" class="modal-wizard-step" ng-if="curStep==1">
+    <h1><strong>Welcome</strong></h1>
+    <p>This wizard will guide you through the process of booking a car.</p>
+    <div class="logo"></div>
+    <div class="area-button">
+      <button class="btn btn-lg btn-primary" ng-click="nextStep()">Let's go!</button>
+    </div>
+  </div>
+  <div class="modal-wizard-step" ng-if="curStep==2">
+    <h1><strong>Select Date</strong> you need a car for</h1>
+    <jsc-date-picker ng-click="nextStep()"></jsc-date-picker>
+  </div>
+  <div class="modal-wizard-step" ng-if="curStep==3">
+    <h1><strong>Select Time</strong> your trip starts at</h1>
+    <jsc-time-picker></jsc-time-picker>
+    <div class="area-button">
+      <button class="btn btn-lg btn-primary" ng-click="nextStep()">Next</button>
+    </div>
+  </div>
+  <div class="modal-wizard-step" ng-if="curStep==4">
+    <h1><strong>Specify Duration</strong> of your trip</h1>
+    <jsc-duration-picker ng-click="nextStep()"></jsc-duration-picker>
+  </div>
+  <div id="modal-wizard-step-done" class="modal-wizard-step" ng-if="curStep==5">
+    <h1><strong>Almost Done</strong></h1>
+    <p>You’re almost booked a car. One last step left. Select a preferred smove pickup point where you’d like to start your trip from and click the Book button.</p>
+    <div class="area-button">
+      <button class="btn btn-lg btn-primary" ng-click="finish()">Proceed</button>
+    </div>
+  </div>
+</div>
