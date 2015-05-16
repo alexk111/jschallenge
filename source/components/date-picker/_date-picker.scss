@@ -1,2 +1,104 @@
 .jsc-date-picker {
+  .glyphicon-chevron-left:before {
+    content: "\e251";
+  }
+  .glyphicon-chevron-right:before {
+    content: "\e250";
+  }
+  table {
+    width: 100%;
+    outline:none;
+  }
+  th, td {
+    padding:3px;
+  }
+  td {
+    width:14.2857%;
+    &:last-child {
+      width:auto;
+    }
+  }
+  thead {
+    tr:last-child {
+      th {
+        padding:8px 3px;
+      }
+    }
+  }
+  .btn {
+    padding:0;
+    span {
+      display:block;
+    }
+  }
+  .btn-default {
+    span {
+      background: $c-blue;
+      color: $c-white;
+      &.text-muted {
+        background: $c-lightblue;
+      }
+    }
+    &:hover, &:active {
+      span {
+        background: darken($c-blue,10%);
+        color: $c-white;
+        &.text-muted {
+          background: darken($c-lightblue,10%);
+        }
+      }
+    }
+    &[disabled] {
+      span {
+        background: $c-grey;
+      }
+    }
+  }
+  .text-info {
+    color: $c-white;
+  }
+
+  th {
+    font-size: 26px;
+    line-height: 34px;
+    color: $c-black;
+    .btn {
+      width:100%;
+      font-size: 24px;
+      line-height: 32px;
+      padding:5px 0 7px;
+      strong {
+        font-weight:400;
+      }
+      &[disabled] {
+        background: transparent;
+        color:$c-black;
+        opacity:1;
+      }
+    }
+    &:first-child,
+    &:last-child {
+      .btn {
+        padding:7px 0 5px;
+      }
+      .btn-default {
+        background: $c-lightblue;
+        color: $c-white;
+        &:hover, &:active {
+          background: darken($c-lightblue,10%);
+          color: $c-white;
+        }
+      }
+    }
+  }
+  td {
+    .btn {
+      width:100%;
+      span {
+        font-size: 26px;
+        line-height: 34px;
+        padding:10px 0;
+      }
+    }
+  }
 }

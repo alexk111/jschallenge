@@ -8,9 +8,9 @@
       <button class="btn btn-lg btn-primary" ng-click="nextStep()">Let's go!</button>
     </div>
   </div>
-  <div class="modal-wizard-step" ng-if="curStep==2">
+  <div id="modal-wizard-step-date" class="modal-wizard-step" ng-if="curStep==2">
     <h1><strong>Select Date</strong> you need a car for</h1>
-    <jsc-date-picker ng-click="nextStep()"></jsc-date-picker>
+    <jsc-date-picker ng-model="$parent.dt"></jsc-date-picker>
   </div>
   <div class="modal-wizard-step" ng-if="curStep==3">
     <h1><strong>Select Time</strong> your trip starts at</h1>
