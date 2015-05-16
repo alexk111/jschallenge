@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" ng-app="jsChallenge">
 
 <head>
   <meta charset="utf-8">
@@ -16,23 +16,26 @@
   <link rel="stylesheet" href="css/js-challenge.css"/>
 </head>
 
-<body ng-app="jsChallenge">
-  <!--[if lt IE 7]>
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<body>
+  <!--[if lt IE 9]>
+    <div id="browseHappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
   <![endif]-->
 
-  <!-- Add your site or application content here -->
-  <div class="header">
-    <div class="container"></div>
-  </div>
+  <div id="jsChallenge" ng-controller="jsChallengeCtrl">
+    <div id="area-app-loading" ng-show="!appLoaded">
+      <jsc-spinner class="xl"></jsc-spinner>
+    </div>
 
-  <div class="container">
-    <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
-  </div>
+    <div id="area-locations-map">
+      <jsc-locations-map></jsc-locations-map>
+    </div>
 
-  <div class="footer">
-    <div class="container text-center">
-      <p>prepared with <span class="glyphicon glyphicon-heart"></span> by the smove team</p>
+    <div id="area-locations-list">
+      <jsc-locations-list></jsc-locations-list>
+    </div>
+
+    <div id="area-info-pane">
+      <jsc-info-pane></jsc-info-pane>
     </div>
   </div>
 

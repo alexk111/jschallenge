@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body > div, #jsChallenge > div {
+  position: fixed;
+  display:block;
+}
+
+#jsChallenge {
+  top:0; left:0;
+  right: 0; bottom:0;
+}
+
+#browseHappy {
+  z-index: $z-browseHappy;
+  bottom:0; left:0; right:0;
+  font-size:14px;
+  padding:15px;
+  background: $c-red-bg;
+  color: $c-white;
+  text-align: center;
+  a {
+    color: $c-white;
+    text-decoration: underline;
+  }
+}
+
+#area-app-loading {
+
+}
+
+#area-locations-map {
+  top:0; left:0; right:0; bottom:0;
+  &.listIsVisible {
+    left:240px;
+  }
+}
+
+#area-locations-list {
+  top:0; left:0; width:240px; bottom:0;
+}
+
+#area-info-pane {
+  z-index: $z-info-pane;
+  top:0; right:0;
+}
