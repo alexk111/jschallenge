@@ -6,7 +6,7 @@ jsChallenge.service('jscInfoSrvc', function() {
   var info={
     date: new Date(Date.now() + 3 * 3600 * 1000),
     time: new Date(Date.now() + 3 * 3600 * 1000),
-    duration: 0
+    duration: 90
   };
 
   var mins=info.time.getMinutes();
