@@ -1,1 +1,20 @@
-<div class="jsc-duration-picker">Duration Picker</div>
+<div class="jsc-duration-picker">
+  <div class="navigation">
+    <button class="btn btn-secondary btn-lg" ng-disabled="getCurHour()<=0" ng-click="prevHour()">Less</button>
+  </div>
+  <div class="options">
+    <button class="btn btn-primary btn-lg" ng-class="{'active': item.value==$parent.model}" ng-repeat="item in getCurPageItems() track by item.value" ng-click="$parent.model=item.value">
+      <ng-pluralize ng-if="item.hours" count="item.hours"
+                       when="{'one': '1 hour',
+                           'other': '{} hours'}">
+      </ng-pluralize>
+      <ng-pluralize ng-if="item.mins" count="item.mins"
+                       when="{'one': '1 minute',
+                           'other': '{} minutes'}">
+      </ng-pluralize>
+    </button>
+  </div>
+  <div class="navigation">
+    <button class="btn btn-secondary btn-lg" ng-disabled="getCurHour()>=getMaxHour()" ng-click="nextHour()">More</button>
+  </div>
+</div>

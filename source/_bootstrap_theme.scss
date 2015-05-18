@@ -18,8 +18,26 @@
 .btn-primary {
   background:$c-blue;
   &:hover,
-  &:active {
+  &:active,
+  &:focus,
+  &.active {
     background:darken($c-blue,10%);
+  }
+}
+
+.btn-secondary {
+  color: $c-white;
+  background:$c-lightblue;
+  &:hover,
+  &:active,
+  &:focus,
+  &.active {
+    color: $c-white;
+    background:darken($c-lightblue,10%);
+  }
+  &.disabled, &[disabled] {
+    color: $c-white;
+    background:$c-grey;
   }
 }
 

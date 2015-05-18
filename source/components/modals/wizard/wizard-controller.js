@@ -7,8 +7,15 @@ jsChallenge.controller('modalWizardCtrl', function($scope, $modalInstance) {
   $scope.progress=0;
 
   $scope.dt=false;
+  $scope.dur=0;
 
   $scope.$watch('dt', function(newVal, oldVal){
+    if(newVal) {
+      $scope.nextStep();
+    }
+  });
+
+  $scope.$watch('dur', function(newVal, oldVal){
     if(newVal) {
       $scope.nextStep();
     }

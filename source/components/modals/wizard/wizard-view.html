@@ -19,9 +19,9 @@
       <button class="btn btn-lg btn-primary" ng-click="nextStep()">Next</button>
     </div>
   </div>
-  <div class="modal-wizard-step" ng-if="curStep==4">
+  <div id="modal-wizard-step-duration" class="modal-wizard-step" ng-if="curStep==4">
     <h1><strong>Specify Duration</strong> of your trip</h1>
-    <jsc-duration-picker ng-click="nextStep()"></jsc-duration-picker>
+    <jsc-duration-picker ng-model="$parent.dur"></jsc-duration-picker>
   </div>
   <div id="modal-wizard-step-done" class="modal-wizard-step" ng-if="curStep==5">
     <h1><strong>Almost Done</strong></h1>
