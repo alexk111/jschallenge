@@ -8,7 +8,7 @@ jsChallenge.directive('jscDurationPicker', function() {
       model: '=ngModel'
     },
     link: function(scope, element) {
-      var curHour=0, maxHour=23, shiftMins=15, curPageItems=[];
+      var curHour=0, maxHour=9, shiftMins=15, curPageItems=[];
       scope.model=scope.model||0;
       var regenCurPageItems=function() {
         var items=[], i, mins, hours;
