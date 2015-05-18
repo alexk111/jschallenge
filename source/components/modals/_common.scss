@@ -1,0 +1,16 @@
+.modal-info {
+  padding:35px 30px;
+  @include box-sizing(border-box);
+
+  h1 {
+    text-align:center;
+    font-size:29px;
+    line-height:37px;
+    margin:0 0 21px;
+  }
+
+  .area-button {
+    margin-top:80px;
+    text-align:center;
+  }
+}

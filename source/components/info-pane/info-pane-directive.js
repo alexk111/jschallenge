@@ -1,6 +1,6 @@
 'use strict';
 
-jsChallenge.directive('jscInfoPane', function(jscInfoSrvc) {
+jsChallenge.directive('jscInfoPane', function(jscInfoSrvc, $modal) {
   return {
     restrict: 'E',
     templateUrl: 'info-pane/info-pane-directive.html',
@@ -30,6 +30,28 @@ jsChallenge.directive('jscInfoPane', function(jscInfoSrvc) {
         if(newVal===oldVal) return;
         recalcFormattedInfo();
       }, true);
+
+
+      scope.clickDate=function() {
+        $modal.open({
+          templateUrl: 'modals/date/date-view.html',
+          controller: 'modalDateCtrl'
+        });
+      };
+
+      scope.clickTime=function() {
+        $modal.open({
+          templateUrl: 'modals/time/time-view.html',
+          controller: 'modalTimeCtrl'
+        });
+      };
+
+      scope.clickDuration=function() {
+        $modal.open({
+          templateUrl: 'modals/duration/duration-view.html',
+          controller: 'modalDurationCtrl'
+        });
+      };
     }
   }
 });

@@ -8,10 +8,6 @@ jsChallenge.controller('modalWizardCtrl', function($scope, $modalInstance, jscIn
 
   $scope.infoData=jscInfoSrvc.getInfo();
 
-  $scope.$watch('infoData', function(){
-    console.info($scope.infoData);
-  }, true);
-
   $scope.$watch('infoData.date', function(newVal, oldVal){
     if(oldVal === newVal){
         return;

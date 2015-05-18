@@ -1,3 +1,7 @@
 #modal-date {
-
+  .btn.active {
+    span {
+      background:darken($c-blue,10%);
+    }
+  }
 }
