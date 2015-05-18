@@ -12,9 +12,9 @@
     <h1><strong>Select Date</strong> you need a car for</h1>
     <jsc-date-picker ng-model="$parent.dt"></jsc-date-picker>
   </div>
-  <div class="modal-wizard-step" ng-if="curStep==3">
+  <div id="modal-wizard-step-time" class="modal-wizard-step" ng-if="curStep==3">
     <h1><strong>Select Time</strong> your trip starts at</h1>
-    <jsc-time-picker></jsc-time-picker>
+    <jsc-time-picker ng-model="$parent.time"></jsc-time-picker>
     <div class="area-button">
       <button class="btn btn-lg btn-primary" ng-click="nextStep()">Next</button>
     </div>

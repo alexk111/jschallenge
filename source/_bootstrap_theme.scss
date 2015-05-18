@@ -5,10 +5,16 @@
   @include border-radius(0);
 }
 
+.form-control {
+  @include border-radius(0);
+  @include box-shadow(none);
+}
+
 .btn {
   @include border-radius(0);
   border:0;
 }
+
 .btn-primary {
   background:$c-blue;
   &:hover,
