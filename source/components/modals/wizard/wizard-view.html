@@ -10,18 +10,18 @@
   </div>
   <div id="modal-wizard-step-date" class="modal-wizard-step" ng-if="curStep==2">
     <h1><strong>Select Date</strong> you need a car for</h1>
-    <jsc-date-picker ng-model="$parent.infoData.date"></jsc-date-picker>
+    <jsc-date-picker ng-model="$parent.date"></jsc-date-picker>
   </div>
   <div id="modal-wizard-step-time" class="modal-wizard-step" ng-if="curStep==3">
     <h1><strong>Select Time</strong> your trip starts at</h1>
-    <jsc-time-picker ng-model="$parent.infoData.time"></jsc-time-picker>
+    <jsc-time-picker ng-model="$parent.time"></jsc-time-picker>
     <div class="area-button">
       <button class="btn btn-lg btn-primary" ng-click="nextStep()">Next</button>
     </div>
   </div>
   <div id="modal-wizard-step-duration" class="modal-wizard-step" ng-if="curStep==4">
     <h1><strong>Specify Duration</strong> of your trip</h1>
-    <jsc-duration-picker ng-model="$parent.infoData.duration"></jsc-duration-picker>
+    <jsc-duration-picker ng-model="$parent.duration"></jsc-duration-picker>
   </div>
   <div id="modal-wizard-step-done" class="modal-wizard-step" ng-if="curStep==5">
     <h1><strong>Almost Done</strong></h1>

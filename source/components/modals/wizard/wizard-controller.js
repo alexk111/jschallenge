@@ -6,9 +6,11 @@ jsChallenge.controller('modalWizardCtrl', function($scope, $modalInstance, jscIn
   $scope.curStep=1;
   $scope.progress=0;
 
-  $scope.infoData=jscInfoSrvc.getInfo();
+  $scope.date=jscInfoSrvc.getInfo().date;
+  $scope.time=jscInfoSrvc.getInfo().time;
+  $scope.duration=0;
 
-  $scope.$watch('infoData.date', function(newVal, oldVal){
+  $scope.$watch('date', function(newVal, oldVal){
     if(oldVal === newVal){
         return;
     }
@@ -17,7 +19,7 @@ jsChallenge.controller('modalWizardCtrl', function($scope, $modalInstance, jscIn
     }
   });
 
-  $scope.$watch('infoData.duration', function(newVal, oldVal){
+  $scope.$watch('duration', function(newVal, oldVal){
     if(oldVal === newVal){
         return;
     }
@@ -31,6 +33,10 @@ jsChallenge.controller('modalWizardCtrl', function($scope, $modalInstance, jscIn
     $scope.progress=($scope.curStep-1)*progressStep;
   };
   $scope.finish=function() {
+    jscInfoSrvc.getInfo().date=$scope.date;
+    jscInfoSrvc.getInfo().time=$scope.time;
+    jscInfoSrvc.getInfo().duration=$scope.duration;
+
     $modalInstance.close();
   }
 

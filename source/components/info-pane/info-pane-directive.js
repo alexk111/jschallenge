@@ -4,6 +4,9 @@ jsChallenge.directive('jscInfoPane', function(jscInfoSrvc, $modal) {
   return {
     restrict: 'E',
     templateUrl: 'info-pane/info-pane-directive.html',
+    scope: {
+      disabled: '=jscDisabled'
+    },
     link: function(scope, element) {
       scope.infoData=jscInfoSrvc.getInfo();
       var recalcFormattedInfo=function() {
