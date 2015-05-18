@@ -1,21 +1,30 @@
 'use strict';
 
-jsChallenge.controller('modalWizardCtrl', function($scope, $modalInstance) {
+jsChallenge.controller('modalWizardCtrl', function($scope, $modalInstance, jscInfoSrvc) {
   var totalSteps=5,
       progressStep=100/(totalSteps-1);
   $scope.curStep=1;
   $scope.progress=0;
 
-  $scope.dt=false;
-  $scope.dur=0;
+  $scope.infoData=jscInfoSrvc.getInfo();
 
-  $scope.$watch('dt', function(newVal, oldVal){
+  $scope.$watch('infoData', function(){
+    console.info($scope.infoData);
+  }, true);
+
+  $scope.$watch('infoData.date', function(newVal, oldVal){
+    if(oldVal === newVal){
+        return;
+    }
     if(newVal) {
       $scope.nextStep();
     }
   });
 
-  $scope.$watch('dur', function(newVal, oldVal){
+  $scope.$watch('infoData.duration', function(newVal, oldVal){
+    if(oldVal === newVal){
+        return;
+    }
     if(newVal) {
       $scope.nextStep();
     }
