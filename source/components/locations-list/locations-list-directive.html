@@ -4,9 +4,9 @@
     <div class="caption">Pickup Points</div>
   </div>
   <ul>
-    <li ng-repeat="location in getLocations() track by location.id">
+    <li ng-repeat="location in getLocations() track by location.id" ng-class="{'location-difftime': location.minsOffset, 'location-exacttime': !location.minsOffset}">
       <a href="" ng-click="clickLocation(location)">
-        <div class="marker" ng-class="{'marker-difftime': location.minsOffset, 'marker-exacttime': !location.minsOffset}"></div>
+        <div class="marker"></div>
         <div class="name">{{ location.name }}</div>
         <div class="availability" >Available at <strong>{{ location.fmtAvail }}</strong></div>
       </a>
