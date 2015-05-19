@@ -3,6 +3,9 @@
 jsChallenge.service('jscLocationsSrvc', function($http, $q) {
   var that=this,
       locations = [],
+      markers = [],
+      selectedLocation=undefined,
+      selectedMarker=undefined,
       minsOffsets = [0, 15, -15, 30, -30],
       isLoading=false, isError=false;
 
@@ -18,7 +21,7 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
 
   function buildLocation(locationAPIData, minsOffset, tsFrom) {
     tsFrom+=minsOffset*60*1000;
-    locations.push({
+    var location={
       id: locationAPIData.id,
       code: locationAPIData.code,
       lat: locationAPIData.latitude,
@@ -27,7 +30,19 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
       minsOffset: minsOffset,
       tsAvail: tsFrom,
       fmtAvail: moment(tsFrom).format('h:mm A')
-    });
+    };
+
+    var marker={
+      id: location.id,
+      latitude: location.lat,
+      longitude: location.lng,
+      icon: 'images/map-marker-'+(minsOffset?'difftime':'exacttime')+'.png',
+      gOptions: {
+      }
+    };
+
+    locations.push(location);
+    markers.push(marker);
   }
 
   function buildLocations(locationsAPIData, tsFrom) {
@@ -35,6 +50,7 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
     console.log('Result from the API calls:', locationsAPIData);
 
     locations=[];
+    markers=[];
     for(i=0, len=minsOffsets.length;i<len;i++) {
       minsOffset=minsOffsets[i];
       for(j=0, len2=locationsAPIData[i].length;j<len2;j++) {
@@ -90,6 +106,28 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
 
   this.getLocations=function() {
     return locations;
+  };
+
+  this.getMarkers=function() {
+    return markers;
+  };
+
+  this.setSelectedId=function(id) {
+    selectedLocation=findValueLocByID(locations, id);
+    selectedMarker=findValueLocByID(markers, id);
+  };
+
+  this.resetSelectedId=function() {
+    selectedLocation=undefined;
+    selectedMarker=undefined;
+  };
+
+  this.getSelectedLocation=function() {
+    return selectedLocation;
+  };
+
+  this.getSelectedMarker=function() {
+    return selectedMarker;
   };
 
 });

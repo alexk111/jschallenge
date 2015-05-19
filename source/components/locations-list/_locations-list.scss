@@ -50,7 +50,9 @@
       > * {
         position: absolute;
       }
-      &:hover, &:active, &:focus {
+    }
+    &:hover, &.active {
+      > a {
         background: darken($c-darkgrey,10%);
       }
     }
