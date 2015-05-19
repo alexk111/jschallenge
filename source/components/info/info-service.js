@@ -10,7 +10,9 @@ jsChallenge.service('jscInfoSrvc', function() {
   };
 
   var mins=info.time.getMinutes();
-  info.time.setMinutes(mins+(10-info.time.getMinutes()%10));
+  mins+=(10-info.time.getMinutes()%10);
+  info.time.setMinutes(mins);
+  info.date.setMinutes(mins);
 
   this.getInfo=function() {
     return info;
