@@ -1,6 +1,6 @@
 'use strict';
 
-jsChallenge.directive('jscLocationsMap', function(jscLocationsSrvc, $timeout) {
+jsChallenge.directive('jscLocationsMap', function(jscLocationsSrvc, $timeout ,$modal) {
   return {
     restrict: 'E',
     templateUrl: 'locations-map/locations-map-directive.html',
@@ -67,6 +67,13 @@ jsChallenge.directive('jscLocationsMap', function(jscLocationsSrvc, $timeout) {
 
       scope.onWindowCloseClick = function() {
         jscLocationsSrvc.resetSelectedId();
+      };
+
+      scope.onBookClick = function() {
+        $modal.open({
+          templateUrl: 'modals/booked/booked-view.html',
+          controller: 'modalBookedCtrl'
+        });
       };
     }
   }

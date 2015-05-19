@@ -7,7 +7,7 @@
         <div class="date">Date: {{getSelectedLocation().fmtDate}}</div>
         <div class="time" ng-class="{'difftime': getSelectedLocation().minsOffset}">Time: <span>{{getSelectedLocation().fmtAvail}}</span></div>
         <div class="duration">Duration: {{getSelectedLocation().fmtDuration}}</div>
-        <button class="btn btn-primary" ng-click="book()">Book Car</button>
+        <button class="btn btn-primary" ng-click="$parent.onBookClick()">Book Car</button>
       </div>
     </ui-gmap-window>
   </ui-gmap-google-map>
