@@ -38,6 +38,7 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
       longitude: location.lng,
       icon: 'images/map-marker-'+(minsOffset?'difftime':'exacttime')+'.png',
       gOptions: {
+        visible: true
       }
     };
 
@@ -51,6 +52,9 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
 
     locations=[];
     markers=[];
+    selectedLocation=undefined;
+    selectedMarker=undefined;
+
     for(i=0, len=minsOffsets.length;i<len;i++) {
       minsOffset=minsOffsets[i];
       for(j=0, len2=locationsAPIData[i].length;j<len2;j++) {
@@ -59,6 +63,12 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
           buildLocation(locationAPIData, minsOffset, tsFrom);
         }
       }
+    }
+  }
+
+  function makeAllMarkersVisible() {
+    for(var i=0,len=markers.length;i<len;i++) {
+      markers[i].gOptions.visible=true;
     }
   }
 
@@ -115,11 +125,16 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
   this.setSelectedId=function(id) {
     selectedLocation=findValueLocByID(locations, id);
     selectedMarker=findValueLocByID(markers, id);
+    makeAllMarkersVisible();
+    if(selectedMarker) {
+      selectedMarker.gOptions.visible=false;
+    }
   };
 
   this.resetSelectedId=function() {
     selectedLocation=undefined;
     selectedMarker=undefined;
+    makeAllMarkersVisible();
   };
 
   this.getSelectedLocation=function() {

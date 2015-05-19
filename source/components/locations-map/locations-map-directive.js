@@ -10,16 +10,30 @@ jsChallenge.directive('jscLocationsMap', function(jscLocationsSrvc, $timeout) {
       scope.getSelectedMarker=jscLocationsSrvc.getSelectedMarker;
       scope.getMarkers=jscLocationsSrvc.getMarkers;
       scope.windowCoords={latitude: 0, longitude: 0};
+      scope.markerControl={};
 
       scope.$watch('getSelectedMarker()',function(newVal, oldVal){
-        if(!newVal || newVal===oldVal) return;
-        scope.windowCoords={
-          latitude: newVal.latitude,
-          longitude: newVal.longitude
-        };
-        if(!lockMapReposition) {
-          scope.map.center.latitude=newVal.latitude;
-          scope.map.center.longitude=newVal.longitude;
+        if(newVal===oldVal) return;
+        var marker;
+        if(newVal) {
+          scope.windowCoords={
+            latitude: newVal.latitude,
+            longitude: newVal.longitude
+          };
+          if(!lockMapReposition) {
+            scope.map.center.latitude=newVal.latitude;
+            scope.map.center.longitude=newVal.longitude;
+          }
+          if(scope.markerControl) {
+            marker=scope.markerControl.getChildMarkers().get(newVal.id);
+            marker.updateModel(newVal);
+          }
+        }
+        if(oldVal) {
+          if(scope.markerControl) {
+            marker=scope.markerControl.getChildMarkers().get(oldVal.id);
+            marker.updateModel(oldVal);
+          }
         }
       });
 
@@ -46,6 +60,7 @@ jsChallenge.directive('jscLocationsMap', function(jscLocationsSrvc, $timeout) {
 
 
       scope.onWindowCloseClick = function() {
+        jscLocationsSrvc.resetSelectedId();
       };
     }
   }
