@@ -1,5 +1,5 @@
 <div id="jsc-locations-map">
-  <ui-gmap-google-map center='map.center' zoom='map.zoom' events="mapEvents">
+  <ui-gmap-google-map center='map.center' zoom='map.zoom' events="mapEvents" pan="true">
     <ui-gmap-markers models="getMarkers()" coords="'self'" icon="'icon'" options="'gOptions'" events="markerEvents" control="markerControl"></ui-gmap-markers>
     <ui-gmap-window show="!!getSelectedMarker()" coords="windowCoords" closeClick="onWindowCloseClick()" options="windowOptions">
       <div>
