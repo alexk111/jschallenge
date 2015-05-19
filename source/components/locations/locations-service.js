@@ -3,6 +3,7 @@
 jsChallenge.service('jscLocationsSrvc', function($http, $q) {
   var that=this,
       locations = [],
+      minsOffsets = [0, 15, -15, 30, -30],
       isLoading=false, isError=false;
 
   function findValueLocByID(values, id) {
@@ -15,75 +16,61 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
     }
   }
 
-  function buildLocation(valueLoc, tsFrom) {
+  function buildLocation(locationAPIData, minsOffset, tsFrom) {
+    tsFrom+=minsOffset*60*1000;
     locations.push({
-      id: valueLoc.id,
-      code: valueLoc.code,
-      lat: valueLoc.latitude,
-      lng: valueLoc.longitude,
-      name: valueLoc.parking_shortname,
-      tsAvail: tsFrom
+      id: locationAPIData.id,
+      code: locationAPIData.code,
+      lat: locationAPIData.latitude,
+      lng: locationAPIData.longitude,
+      name: locationAPIData.parking_shortname,
+      minsOffset: minsOffset,
+      tsAvail: tsFrom,
+      fmtAvail: moment(tsFrom).format('h:mm A')
     });
   }
 
-  function buildLocations(values, tsFrom) {
-    var i,len, valueLoc, valueLocA, id;
-    console.log('Result from the API calls:', values);
+  function buildLocations(locationsAPIData, tsFrom) {
+    var i,len, j, len2, minsOffset, locationAPIData;
+    console.log('Result from the API calls:', locationsAPIData);
 
     locations=[];
-    for(i=0, len=values[2].data.length;i<len;i++) {
-      valueLoc=values[2].data[i];
-      valueLocA=valueLoc;
-      if(!valueLocA.cars_available) {
-        console.info('(Offset 0) No Avail Cars for: ', valueLoc);
-        id=valueLoc.id;
-        valueLocA=findValueLocByID(values[1].data,id);
-        if(!valueLocA || !valueLocA.cars_available) {
-          console.info('(Offset -15) No Avail Cars for: ', valueLoc);
-          valueLocA=findValueLocByID(values[3].data,id);
-          if(!valueLocA || !valueLocA.cars_available) {
-            console.info('(Offset +15) No Avail Cars for: ', valueLoc);
-            valueLocA=findValueLocByID(values[0].data,id);
-            if(!valueLocA || !valueLocA.cars_available) {
-              console.info('(Offset -30) No Avail Cars for: ', valueLoc);
-              valueLocA=findValueLocByID(values[4].data,id);
-              if(!valueLocA || !valueLocA.cars_available) {
-                console.info('(Offset +30) No Avail Cars for: ', valueLoc);
-                buildLocation(valueLoc, undefined);
-              } else {
-                buildLocation(valueLoc, tsFrom+30*60*1000);
-              }
-            } else {
-              buildLocation(valueLoc, tsFrom-30*60*1000);
-            }
-          } else {
-            buildLocation(valueLoc, tsFrom+15*60*1000);
-          }
-        } else {
-          buildLocation(valueLoc, tsFrom-15*60*1000);
+    for(i=0, len=minsOffsets.length;i<len;i++) {
+      minsOffset=minsOffsets[i];
+      for(j=0, len2=locationsAPIData[i].length;j<len2;j++) {
+        locationAPIData=locationsAPIData[i][j];
+        if(locationAPIData.cars_available && !findValueLocByID(locations, locationAPIData.id)) {
+          buildLocation(locationAPIData, minsOffset, tsFrom);
         }
-      } else {
-        buildLocation(valueLoc, tsFrom);
       }
     }
-
   }
 
   this.reload=function(date, time, duration) {
     isError=false;
     isLoading=true;
 
-    var tsFrom = date.getTime() + (time.getHours()*60 + time.getMinutes())*1000,
-        tsTo = tsFrom + duration * 60 * 1000,
-        url, i, promises=[];
+    var from=new Date(date);
+    from.setHours(0);
+    from.setMinutes(0);
+    from.setSeconds(0);
+    from.setMilliseconds(0);
 
-    for(i=-30*60*1000;i<=30*60*1000;i+=15*60*1000) {
-      url = 'http://jschallenge.smove.sg/provider/1/availability?book_start=' + (tsFrom+i) + '&book_end=' + (tsTo+i);
+    var tsFrom = from.getTime() + (time.getHours()*60 + time.getMinutes())*60*1000,
+        tsTo = tsFrom + duration * 60 * 1000,
+        url, i, len, minsOffset, locationsAPIData=[], promises=[];
+
+    for(i=0, len=minsOffsets.length;i<len;i++) {
+      minsOffset=minsOffsets[i];
+      url = 'http://jschallenge.smove.sg/provider/1/availability?book_start=' + (tsFrom+minsOffset*60*1000) + '&book_end=' + (tsTo+minsOffset*60*1000);
       promises.push($http.get(url));
     }
 
     $q.all(promises).then(function(values){
-      buildLocations(values, tsFrom);
+      for(i=0;i<len;i++) {
+        locationsAPIData.push(values[i].data);
+      }
+      buildLocations(locationsAPIData, tsFrom);
       isLoading=false;
     }, function(err){
       console.error(err);
