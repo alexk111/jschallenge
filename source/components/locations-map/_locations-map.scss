@@ -6,3 +6,63 @@
     height:100%;
   }
 }
+
+.jsc-locations-map-info-window {
+  position:absolute;
+  background: $c-white;
+  color: $c-black;
+  padding: 10px;
+  border: 3px solid $c-orange;
+  text-align: center;
+  width:200px;
+  margin-left:-100px;
+  margin-bottom:8px;
+  @include box-sizing(border-box);
+  @include border-radius(5px);
+
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    border:8px solid $c-orange;
+    border-color: $c-orange transparent transparent;
+    display: block;
+    width: 0;
+    z-index:1;
+    bottom:-16px;
+    left:89px;
+  }
+  &:after {
+    border-color: $c-white transparent transparent;
+    bottom:-12px;
+  }
+
+  .caption {
+    font-size:14px;
+    line-height:22px;
+    font-weight:700;
+    margin-bottom:5px;
+  }
+
+  .date, .time, .duration {
+    font-size:12px;
+    line-height:19px;
+  }
+  .time {
+    span {
+      display:inline-block;
+      padding:3px 5px 2px;
+    }
+    &.difftime {
+      span {
+        background:$c-red-highlight;
+      }
+    }
+  }
+
+  .btn {
+    margin: 14px 0 6px;
+    font-size:14px;
+    line-height:22px;
+    padding:10px 20px;
+  }
+}

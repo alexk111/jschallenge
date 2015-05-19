@@ -8,8 +8,14 @@ jsChallenge.directive('jscLocationsMap', function(jscLocationsSrvc, $timeout) {
       var lockMapReposition=false, lockTimer;
       scope.map = { center: { latitude: 1.3, longitude: 103.8 }, zoom: 15 };
       scope.getSelectedMarker=jscLocationsSrvc.getSelectedMarker;
+      scope.getSelectedLocation=jscLocationsSrvc.getSelectedLocation;
       scope.getMarkers=jscLocationsSrvc.getMarkers;
       scope.windowCoords={latitude: 0, longitude: 0};
+      scope.windowOptions={
+        boxClass: 'jsc-locations-map-info-window',
+        alignBottom: true,
+        closeBoxURL: ''
+      };
       scope.markerControl={};
 
       scope.$watch('getSelectedMarker()',function(newVal, oldVal){

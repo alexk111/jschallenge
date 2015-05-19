@@ -19,8 +19,20 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
     }
   }
 
-  function buildLocation(locationAPIData, minsOffset, tsFrom) {
+  function buildLocation(locationAPIData, minsOffset, tsFrom, duration) {
     tsFrom+=minsOffset*60*1000;
+
+    var mDur=moment.duration(duration, 'minutes'),
+        hrs=mDur.hours(), mins=mDur.minutes(), strHrs='', strMins='';
+
+    if(hrs) {
+      strHrs=hrs+(hrs>1?' hrs':' hr');
+    }
+
+    if(mins) {
+      strMins=mins+(mins>1?' mins':' min');
+    }
+
     var location={
       id: locationAPIData.id,
       code: locationAPIData.code,
@@ -29,6 +41,8 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
       name: locationAPIData.parking_shortname,
       minsOffset: minsOffset,
       tsAvail: tsFrom,
+      fmtDuration: strHrs+' '+strMins,
+      fmtDate: moment(tsFrom).format('MMM D, YYYY'),
       fmtAvail: moment(tsFrom).format('h:mm A')
     };
 
@@ -36,7 +50,13 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
       id: location.id,
       latitude: location.lat,
       longitude: location.lng,
-      icon: 'images/map-marker-'+(minsOffset?'difftime':'exacttime')+'.png',
+      icon: {
+        url: 'images/map-marker-'+(minsOffset?'difftime':'exacttime')+'.png',
+        anchor: {
+          x: 31,
+          y: 41
+        }
+      },
       gOptions: {
         visible: true
       }
@@ -46,7 +66,7 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
     markers.push(marker);
   }
 
-  function buildLocations(locationsAPIData, tsFrom) {
+  function buildLocations(locationsAPIData, tsFrom, duration) {
     var i,len, j, len2, minsOffset, locationAPIData;
     console.log('Result from the API calls:', locationsAPIData);
 
@@ -60,7 +80,7 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
       for(j=0, len2=locationsAPIData[i].length;j<len2;j++) {
         locationAPIData=locationsAPIData[i][j];
         if(locationAPIData.cars_available && !findValueLocByID(locations, locationAPIData.id)) {
-          buildLocation(locationAPIData, minsOffset, tsFrom);
+          buildLocation(locationAPIData, minsOffset, tsFrom, duration);
         }
       }
     }
@@ -96,7 +116,7 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
       for(i=0;i<len;i++) {
         locationsAPIData.push(values[i].data);
       }
-      buildLocations(locationsAPIData, tsFrom);
+      buildLocations(locationsAPIData, tsFrom, duration);
       isLoading=false;
     }, function(err){
       console.error(err);

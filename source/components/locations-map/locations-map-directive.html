@@ -1,8 +1,14 @@
 <div id="jsc-locations-map">
   <ui-gmap-google-map center='map.center' zoom='map.zoom' events="mapEvents">
     <ui-gmap-markers models="getMarkers()" coords="'self'" icon="'icon'" options="'gOptions'" events="markerEvents" control="markerControl"></ui-gmap-markers>
-    <ui-gmap-window show="!!getSelectedMarker()" coords="windowCoords" closeClick="onWindowCloseClick()">
-        <div>WINDOW</div>
+    <ui-gmap-window show="!!getSelectedMarker()" coords="windowCoords" closeClick="onWindowCloseClick()" options="windowOptions">
+      <div>
+        <div class="caption">{{getSelectedLocation().name}}</div>
+        <div class="date">Date: {{getSelectedLocation().fmtDate}}</div>
+        <div class="time" ng-class="{'difftime': getSelectedLocation().minsOffset}">Time: <span>{{getSelectedLocation().fmtAvail}}</span></div>
+        <div class="duration">Duration: {{getSelectedLocation().fmtDuration}}</div>
+        <button class="btn btn-primary" ng-click="book()">Book Car</button>
+      </div>
     </ui-gmap-window>
   </ui-gmap-google-map>
 </div>
