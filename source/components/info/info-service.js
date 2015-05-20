@@ -1,11 +1,11 @@
 'use strict';
 
-jsChallenge.service('jscInfoSrvc', function() {
+jsChallenge.service('jscInfoSrvc', function(constInitialBookFromNow, constAllowedBookFromNow) {
   var that=this;
 
   var info={
-    date: new Date(Date.now() + 3 * 3600 * 1000),
-    time: new Date(Date.now() + 3 * 3600 * 1000),
+    date: new Date(Date.now() + constInitialBookFromNow),
+    time: new Date(Date.now() + constInitialBookFromNow),
     duration: 90
   };
 
@@ -16,5 +16,17 @@ jsChallenge.service('jscInfoSrvc', function() {
 
   this.getInfo=function() {
     return info;
+  };
+
+  this.getDateTime=function() {
+    var dt=new Date(info.date);
+    dt.setHours(info.time.getHours());
+    dt.setMinutes(info.time.getMinutes());
+    dt.setSeconds(0);
+    dt.setMilliseconds(0);
+    return dt;
+  };
+  this.isDateTimeValid=function() {
+    return(this.getDateTime()>(new Date(Date.now() + constAllowedBookFromNow)));
   };
 });

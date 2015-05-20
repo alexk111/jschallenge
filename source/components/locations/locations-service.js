@@ -92,17 +92,11 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
     }
   }
 
-  this.reload=function(date, time, duration) {
+  this.reload=function(dateTime, duration) {
     isError=false;
     isLoading=true;
 
-    var from=new Date(date);
-    from.setHours(0);
-    from.setMinutes(0);
-    from.setSeconds(0);
-    from.setMilliseconds(0);
-
-    var tsFrom = from.getTime() + (time.getHours()*60 + time.getMinutes())*60*1000,
+    var tsFrom = dateTime.getTime(),
         tsTo = tsFrom + duration * 60 * 1000,
         url, i, len, minsOffset, locationsAPIData=[], promises=[];
 

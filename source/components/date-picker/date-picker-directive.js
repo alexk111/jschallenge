@@ -1,6 +1,6 @@
 'use strict';
 
-jsChallenge.directive('jscDatePicker', function($interval) {
+jsChallenge.directive('jscDatePicker', function($interval, constAllowedBookFromNow) {
   return {
     restrict: 'E',
     templateUrl: 'date-picker/date-picker-directive.html',
@@ -9,7 +9,7 @@ jsChallenge.directive('jscDatePicker', function($interval) {
     },
     link: function(scope, element) {
       function updateLimitDates() {
-        scope.minDate=new Date(Date.now() + 2 * 3600 * 1000);
+        scope.minDate=new Date(Date.now() + constAllowedBookFromNow);
       }
       updateLimitDates();
 
