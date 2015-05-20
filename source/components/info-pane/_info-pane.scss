@@ -1,13 +1,24 @@
 #jsc-info-pane {
-  background: $c-white;
-  padding:10px 17px;
-  button {
-    display:inline-block;
-    width:140px;
+  .pane {
+    background: $c-white;
+    padding:10px 17px;
+    button {
+      display:inline-block;
+      width:140px;
+      font-size:14px;
+      line-height:22px;
+      font-weight:700;
+      overflow:hidden;
+      padding:11px 0;
+    }
+  }
+  .msg-invalid {
+    width:100%;
+    text-align: center;
+    background:$c-red-bg;
+    color:$c-white;
     font-size:14px;
     line-height:22px;
-    font-weight:700;
-    overflow:hidden;
-    padding:11px 0;
+    padding:11px;
   }
 }

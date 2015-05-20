@@ -1,5 +1,10 @@
 <div id="jsc-info-pane">
-  <button class="btn btn-primary" ng-click="clickDate()" ng-disabled="disabled">{{ formattedDate }}</button>
-  <button class="btn btn-primary" ng-click="clickTime()" ng-disabled="disabled">{{ formattedTime }}</button>
-  <button class="btn btn-primary" ng-click="clickDuration()" ng-disabled="disabled">{{ formattedDuration }}</button>
+  <div class="pane">
+    <button class="btn" ng-class="{'btn-primary': isDateTimeValid, 'btn-danger': !isDateTimeValid}" ng-click="clickDate()" ng-disabled="disabled">{{ formattedDate }}</button>
+    <button class="btn" ng-class="{'btn-primary': isDateTimeValid, 'btn-danger': !isDateTimeValid}" ng-click="clickTime()" ng-disabled="disabled">{{ formattedTime }}</button>
+    <button class="btn btn-primary" ng-click="clickDuration()" ng-disabled="disabled">{{ formattedDuration }}</button>
+  </div>
+  <div class="msg-invalid" ng-show="!isDateTimeValid">
+    You can only book a car at least 2 hours from now.
+  </div>
 </div>

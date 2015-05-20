@@ -1,6 +1,6 @@
 'use strict';
 
-jsChallenge.directive('jscInfoPane', function(jscInfoSrvc, $modal) {
+jsChallenge.directive('jscInfoPane', function(jscInfoSrvc, $modal, $interval) {
   return {
     restrict: 'E',
     templateUrl: 'info-pane/info-pane-directive.html',
@@ -9,6 +9,7 @@ jsChallenge.directive('jscInfoPane', function(jscInfoSrvc, $modal) {
     },
     link: function(scope, element) {
       scope.infoData=jscInfoSrvc.getInfo();
+      scope.isDateTimeValid=true;
       var recalcFormattedInfo=function() {
         var mDate=moment(scope.infoData.date),
             mTime=moment(scope.infoData.time),
@@ -30,10 +31,13 @@ jsChallenge.directive('jscInfoPane', function(jscInfoSrvc, $modal) {
       recalcFormattedInfo();
 
       scope.$watch('infoData',function(newVal, oldVal){
-        if(newVal===oldVal) return;
         recalcFormattedInfo();
+        scope.isDateTimeValid=jscInfoSrvc.isDateTimeValid();
       }, true);
 
+      $interval(function(){
+        scope.isDateTimeValid=jscInfoSrvc.isDateTimeValid();
+      },60*1000);
 
       scope.clickDate=function() {
         $modal.open({
