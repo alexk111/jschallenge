@@ -47,10 +47,7 @@ body > div, #jsChallenge > div {
 }
 
 #area-locations-map {
-  top:0; left:0; right:0; bottom:0;
-  &.listIsVisible {
-    left:240px;
-  }
+  top:0; left:240px; right:0; bottom:0;
 }
 
 #area-locations-list {
