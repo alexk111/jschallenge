@@ -48,6 +48,7 @@
     display: block;
     position:relative;
     > a {
+      @include transition(background $t-common-easing $t-common-dur);
       background:$c-darkgrey;
       padding:0;
       margin:0;

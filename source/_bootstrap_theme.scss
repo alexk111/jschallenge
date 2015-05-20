@@ -11,6 +11,7 @@
 }
 
 .btn {
+  @include transition(background $t-common-easing $t-common-dur);
   @include border-radius(0);
   border:0;
 }

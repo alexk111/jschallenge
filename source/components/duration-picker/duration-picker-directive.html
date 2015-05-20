@@ -3,7 +3,7 @@
     <button class="btn btn-secondary btn-lg" ng-disabled="getCurHour()<=0" ng-click="prevHour()">Less</button>
   </div>
   <div class="options">
-    <button class="btn btn-primary btn-lg" ng-class="{'active': item.value==$parent.model}" ng-repeat="item in getCurPageItems() track by item.value" ng-click="$parent.model=item.value">
+    <button class="btn btn-primary btn-lg ng-animate-disabled" ng-class="{'active': item.value==$parent.model}" ng-repeat="item in getCurPageItems() track by item.value" ng-click="$parent.model=item.value">
       <ng-pluralize ng-if="item.hours" count="item.hours"
                        when="{'one': '1 hour',
                            'other': '{} hours'}">

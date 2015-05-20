@@ -5,7 +5,7 @@
   </div>
   <div class="list">
     <ul ng-hide="isLoading() || !getLocations().length">
-      <li ng-repeat="location in getLocations() track by location.id" ng-class="{'active': getSelectedLocation() && location.id==getSelectedLocation().id, 'location-difftime': location.minsOffset, 'location-exacttime': !location.minsOffset}">
+      <li ng-repeat="location in getLocations() track by location.id" class="ng-animate-disabled" ng-class="{'active': getSelectedLocation() && location.id==getSelectedLocation().id, 'location-difftime': location.minsOffset, 'location-exacttime': !location.minsOffset}">
         <a href="" ng-click="clickLocation(location)">
           <div class="marker"></div>
           <div class="name">{{ location.name }}</div>
