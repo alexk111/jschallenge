@@ -93,10 +93,10 @@ gulp.task('styles:dev', function(){
     }))
     .pipe(compass({
       sass: Config.paths.source.root,
-      css: '../'+Config.paths.compileDev.css,
+      css: Config.paths.compileDev.css,
       errLogToConsole: true
     }))
-    .pipe(gulp.dest(Config.paths.compileDev.css));
+    .pipe(gulp.dest(Config.paths.compileDev.root));
 });
 gulp.task('styles:prod:clean', function(){
   return gulp.src([Config.paths.compileProd.root + '/**/*.css'], { read: false })
@@ -106,11 +106,11 @@ gulp.task('styles:prod', ['styles:prod:clean'], function(){
   return gulp.src(Config.paths.source.root + '/' + pkg.name + '.scss')
     .pipe(compass({
       sass: Config.paths.source.root,
-      css: '../'+Config.paths.compileProd.css,
+      css: Config.paths.compileProd.css,
       errLogToConsole: true
     }))
     .pipe(minifyCss())
-    .pipe(gulp.dest(Config.paths.compileProd.css));
+    .pipe(gulp.dest(Config.paths.compileProd.root));
 });
 
 
