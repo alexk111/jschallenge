@@ -30,7 +30,20 @@ body > div, #jsChallenge > div {
 }
 
 #area-app-loading {
-
+  z-index: $z-app-loading;
+  background: $c-white;
+  top:0; left:0; right:0; bottom:0;
+  > div {
+    position: absolute;
+    top:50%; left:50%;
+    width:130px;
+    height:210px;
+    margin-top:-105px;
+    margin-left:-65px;
+    background:url($img-logo) no-repeat center;
+    background-size:130px 210px;
+    @include animation(spinner ease-in-out infinite 0.6s);
+  }
 }
 
 #area-locations-map {

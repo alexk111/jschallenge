@@ -22,8 +22,8 @@
   <![endif]-->
 
   <div id="jsChallenge" ng-controller="jsChallengeCtrl">
-    <div id="area-app-loading" ng-show="!appLoaded">
-      <jsc-spinner class="xl"></jsc-spinner>
+    <div id="area-app-loading" ng-if="!appLoaded">
+      <div></div>
     </div>
 
     <div id="area-locations-map">

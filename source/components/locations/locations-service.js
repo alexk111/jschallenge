@@ -70,11 +70,6 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
     var i,len, j, len2, minsOffset, locationAPIData;
     console.log('Result from the API calls:', locationsAPIData);
 
-    locations=[];
-    markers=[];
-    selectedLocation=undefined;
-    selectedMarker=undefined;
-
     for(i=0, len=minsOffsets.length;i<len;i++) {
       minsOffset=minsOffsets[i];
       for(j=0, len2=locationsAPIData[i].length;j<len2;j++) {
@@ -93,8 +88,15 @@ jsChallenge.service('jscLocationsSrvc', function($http, $q) {
   }
 
   this.reload=function(dateTime, duration) {
+    if(isLoading) return;
+
     isError=false;
     isLoading=true;
+
+    locations=[];
+    markers=[];
+    selectedLocation=undefined;
+    selectedMarker=undefined;
 
     var tsFrom = dateTime.getTime(),
         tsTo = tsFrom + duration * 60 * 1000,

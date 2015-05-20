@@ -7,10 +7,11 @@ jsChallenge.directive('jscLocationsList', function(jscLocationsSrvc, $timeout, $
     link: function(scope, element) {
       var lockListScroll=false, lockTimer;
 
+      scope.isLoading=jscLocationsSrvc.isLoading;
       scope.getLocations=jscLocationsSrvc.getLocations;
       scope.getSelectedLocation=jscLocationsSrvc.getSelectedLocation;
 
-      var elContainer=element.find('ul')[0];
+      var elContainer=element[0].getElementsByClassName('list')[0];
 
       /* Animation Layer */
       var reqAnimFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.oRequestAnimationFrame,

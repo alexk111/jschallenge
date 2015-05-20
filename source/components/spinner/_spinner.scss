@@ -1,2 +1,12 @@
 .jsc-spinner {
+  position: absolute;
+  top:50%; left:50%;
+
+  width:65px;
+  height:105px;
+  margin-top:-52px;
+  margin-left:-32px;
+  background:url($img-logo) no-repeat center;
+  background-size:65px 105px;
+  @include animation(spinner ease-in-out infinite 0.6s);
 }
