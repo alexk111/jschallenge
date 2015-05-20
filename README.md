@@ -1,4 +1,10 @@
-# jschallenge
+# notes from me
+
+1. I replaced grunt with gulp. Run `gulp` for preview and `gulp build` for building.
+2. App description, wireframes and mockups are in the `_design` dir. I designed them using Adobe Fireworks. Exported slides are in the `_design/export` dir.
+
+
+## jschallenge
 
 The purpose of this github repository is to challenge YOU, yes YOU, to show us a bit of your skills in angular, node and javascript.
 
