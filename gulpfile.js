@@ -87,7 +87,10 @@ gulp.task('index:prod', function(){
 // Compile Styles
 gulp.task('styles:dev', function(){
   return gulp.src(Config.paths.source.root + '/' + pkg.name + '.scss')
-    .pipe(plumber())
+    .pipe(plumber(function(error) {
+      gutil.beep();
+      this.emit('end');
+    }))
     .pipe(compass({
       sass: Config.paths.source.root,
       css: '../'+Config.paths.compileDev.css,
