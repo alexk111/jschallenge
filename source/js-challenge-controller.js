@@ -18,13 +18,11 @@ jsChallenge.controller('jsChallengeCtrl', function($scope, $modal, jscInfoSrvc, 
     $scope.isDateTimeValid=jscInfoSrvc.isDateTimeValid();
   },60*1000);
 
-  /*
   $modal.open({
     templateUrl: 'modals/wizard/wizard-view.html',
     controller: 'modalWizardCtrl',
     backdrop: 'static',
     keyboard: false
   });
-  */
 
 });

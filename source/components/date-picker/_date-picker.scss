@@ -33,6 +33,7 @@
   }
   .btn-default {
     span {
+      @include transition(all $t-common-easing $t-common-dur);
       background: $c-blue;
       color: $c-white;
       &.text-muted {

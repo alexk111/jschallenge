@@ -1,11 +1,13 @@
 .jsc-time-picker {
   .glyphicon-chevron-up {
+    @include transition(all $t-common-easing $t-common-dur);
     font-size:22px;
     &:before {
       content: "\e253";
     }
   }
   .glyphicon-chevron-down{
+    @include transition(all $t-common-easing $t-common-dur);
     font-size:22px;
     &:before {
       content: "\e252";
